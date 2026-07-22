@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koch Ofenbau – Kachelöfen, Kaminöfen und Schornsteine aus Altena</title>
+<meta name="description" content="Tim Koch, Ofen- und Luftheizungsbau-Meister aus Altena. Kachelöfen, Kaminöfen und Edelstahl-Schornsteine – vom ersten Gespräch bis zum ersten Feuer aus einer Hand.">
+<meta name="theme-color" content="#12100E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   KOCH OFENBAU
+   Farbwelt: Ruß (Feuerraum), Glasur-Grün (Ofenkachel),
+   Schamotte (heller Stein), Glut (nur als Akzent).
+   Kontrast: alle Textfarben auf dunklem Grund >= 7:1
+   ============================================================ */
+:root{
+  --soot:#12100E;
+  --soot-2:#1A1714;
+  --ash:#262220;
+  --ash-line:#403A35;
+  --glaze:#17453B;        /* dunkles Glasurgrün: nur auf HELLEM Grund */
+  --glaze-line:#2F7A69;   /* Linien und Rahmen */
+  --glaze-txt:#7CC7B1;    /* Glasurgrün als TEXT auf dunklem Grund */
+  --chamotte:#E6DCCF;
+  --chamotte-2:#CFC2B0;
+  --ember:#E8A44A;
+  --paper:#F2ECE4;
+  --muted:#B9B0A5;        /* aufgehellt: war zu dunkel */
+  --soft:#D8D0C6;
+  --ink:#171310;
+  --ink-2:#453D36;
+
+  --f-display:"Bricolage Grotesque",system-ui,sans-serif;
+  --f-body:"Literata",Georgia,serif;
+
+  --wrap:1180px;
+  --pad:clamp(20px,5vw,48px);
+  --gap:clamp(28px,5vw,64px);
+  --sec-y:clamp(72px,11vw,140px);
+  --r:2px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--soot);color:var(--paper);
+  font-family:var(--f-body);font-size:clamp(16px,1.05vw,17.5px);
+  line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--pad)}
+
+/* ---------- Typo-Rollen ---------- */
+.eyebrow{
+  font-family:var(--f-display);font-weight:600;font-size:.74rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--glaze-txt);
+  margin:0 0 1.1em;display:flex;align-items:center;gap:.75em;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--glaze-txt);flex:none}
+.sec--light .eyebrow{color:var(--glaze)}
+.sec--light .eyebrow::before{background:var(--glaze)}
+
+h1,h2,h3,.h{font-family:var(--f-display);font-weight:700;line-height:1.02;letter-spacing:-.025em;margin:0}
+h2{font-size:clamp(2rem,5.4vw,3.5rem)}
+h3{font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.15;letter-spacing:-.015em}
+p{margin:0 0 1.1em}
+.lead{font-size:clamp(1.05rem,1.7vw,1.25rem);color:var(--soft);max-width:56ch}
+.sec--light .lead{color:var(--ink-2)}
+
+/* ---------- Buttons ---------- */
+.btn{
+  font-family:var(--f-display);font-weight:600;font-size:.95rem;
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  padding:.95em 1.5em;border-radius:var(--r);text-decoration:none;cursor:pointer;
+  border:1px solid transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease;
+}
+.btn--fire{background:var(--ember);color:#241403;box-shadow:0 8px 30px -12px rgba(232,164,74,.8)}
+.btn--fire:hover{transform:translateY(-2px);background:#F3B25C}
+.btn--ghost{border-color:rgba(242,236,228,.32);color:var(--paper);background:none}
+.btn--ghost:hover{border-color:var(--paper);background:rgba(242,236,228,.07)}
+.sec--light .btn--ghost{border-color:rgba(23,19,16,.3);color:var(--ink)}
+.sec--light .btn--ghost:hover{border-color:var(--ink);background:rgba(23,19,16,.06)}
+
+/* ---------- Kopfzeile ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(18,16,14,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(242,236,228,.1);
+}
+.nav__in{display:flex;align-items:center;gap:1.5rem;height:66px;max-width:var(--wrap);margin:0 auto;padding-inline:var(--pad)}
+.mark{font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;font-size:1.05rem;text-decoration:none;line-height:1;margin-right:auto;color:var(--paper)}
+.mark span{display:block;font-size:.6rem;font-weight:600;letter-spacing:.24em;color:var(--muted);margin-top:.35em}
+.nav__links{display:none;gap:1.6rem;font-family:var(--f-display);font-size:.9rem;font-weight:500}
+.nav__links a{text-decoration:none;color:var(--soft);transition:color .2s}
+.nav__links a:hover{color:var(--ember)}
+.nav__call{
+  font-family:var(--f-display);font-weight:600;font-size:.88rem;text-decoration:none;color:var(--paper);
+  border:1px solid rgba(242,236,228,.28);padding:.55em 1em;border-radius:var(--r);white-space:nowrap;
+}
+.nav__call:hover{border-color:var(--ember);color:var(--ember)}
+@media(min-width:900px){.nav__links{display:flex}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;isolation:isolate;min-height:min(94svh,860px);display:flex;align-items:flex-end;overflow:hidden}
+.hero__bg{position:absolute;inset:0;z-index:-3;background:var(--soot-2)}
+.hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:saturate(.75) contrast(1.05)}
+.hero__veil{position:absolute;inset:0;z-index:-2;
+  background:
+    linear-gradient(180deg,rgba(18,16,14,.84) 0%,rgba(18,16,14,.55) 35%,rgba(18,16,14,.95) 88%),
+    linear-gradient(90deg,rgba(18,16,14,.92) 0%,rgba(18,16,14,.25) 70%);
+}
+.glow{
+  position:absolute;z-index:-1;width:min(78vw,720px);aspect-ratio:1;border-radius:50%;
+  left:-14vw;bottom:-22vh;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%,rgba(232,164,74,.4),rgba(200,90,30,.15) 42%,transparent 70%);
+  filter:blur(46px);animation:pulse 9s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.95;transform:scale(1.09)}}
+.hero__in{padding-block:clamp(56px,12vw,110px);position:relative}
+.hero h1{font-size:clamp(2.8rem,9vw,6.2rem);max-width:14ch;text-wrap:balance;color:var(--paper)}
+.hero h1 em{font-style:normal;color:var(--ember)}
+.hero__lead{margin-top:1.4rem;max-width:46ch;font-size:clamp(1.05rem,1.9vw,1.28rem);color:var(--soft)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
+.hero__meta{
+  display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;margin-top:2.8rem;padding-top:1.4rem;
+  border-top:1px solid rgba(242,236,228,.18);
+  font-family:var(--f-display);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+
+/* ---------- Sektionen ---------- */
+.sec{padding-block:var(--sec-y);position:relative}
+.sec--light{background:var(--chamotte);color:var(--ink)}
+.sec--light p{color:var(--ink-2)}
+.sec--ash{background:var(--soot-2)}
+.sec__head{max-width:60ch;margin-bottom:clamp(36px,5vw,64px)}
+
+/* ---------- Signatur: Kachelraster ---------- */
+.kacheln{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:760px){.kacheln{grid-template-columns:repeat(3,1fr)}}
+.kachel{
+  position:relative;display:block;text-decoration:none;overflow:hidden;
+  border:1px solid var(--ash-line);background:var(--ash);
+  aspect-ratio:4/5;isolation:isolate;
+  transition:border-color .35s ease,transform .35s ease;
+}
+.kachel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:saturate(.65) brightness(.6);transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .5s ease}
+.kachel::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(23,69,59,.4) 0%,rgba(18,16,14,.35) 45%,rgba(18,16,14,.95) 100%);
+  transition:background .5s ease}
+.kachel__body{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(20px,3vw,28px)}
+.kachel__no{font-family:var(--f-display);font-weight:600;font-size:.72rem;letter-spacing:.2em;color:var(--glaze-txt);margin-bottom:.9em}
+.kachel h3{color:var(--paper)}
+.kachel p{color:var(--soft);font-size:.94rem;margin:.6em 0 0;max-width:30ch}
+.kachel__go{font-family:var(--f-display);font-weight:600;font-size:.85rem;color:var(--ember);margin-top:1.1em}
+.kachel:hover{border-color:rgba(232,164,74,.6);transform:translateY(-4px)}
+.kachel:hover img{transform:scale(1.06);filter:saturate(.9) brightness(.7)}
+
+/* ---------- Zweispalter ---------- */
+.split{display:grid;gap:var(--gap);align-items:center;grid-template-columns:1fr}
+@media(min-width:880px){
+  .split{grid-template-columns:1fr 1fr}
+  .split--flip .split__media{order:2}
+}
+.split__media{position:relative}
+.split__media img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--ash-line);background:var(--soot-2)}
+.sec--light .split__media img{border-color:var(--chamotte-2)}
+.split__media::before{content:"";position:absolute;inset:auto -10px -10px auto;width:60%;height:60%;
+  border-right:1px solid var(--glaze-line);border-bottom:1px solid var(--glaze-line);opacity:.55;pointer-events:none}
+
+.vorteile{list-style:none;margin:1.6em 0 0;padding:0;display:grid;gap:.1em}
+.vorteile li{position:relative;padding:.75em 0 .75em 2.1em;border-top:1px solid rgba(23,19,16,.16);font-size:.98rem;color:var(--ink)}
+.vorteile li:last-child{border-bottom:1px solid rgba(23,19,16,.16)}
+.vorteile li::before{content:"";position:absolute;left:.2em;top:1.35em;width:9px;height:9px;background:var(--glaze);transform:rotate(45deg)}
+
+/* ---------- Ablauf ---------- */
+.ablauf{display:grid;gap:0;grid-template-columns:1fr}
+@media(min-width:820px){.ablauf{grid-template-columns:repeat(4,1fr)}}
+.step{padding:clamp(24px,3vw,34px) clamp(18px,2.2vw,28px);border-top:2px solid var(--ash-line);position:relative}
+@media(min-width:820px){.step{border-left:1px solid var(--ash-line)}.step:first-child{border-left:none}}
+.step__no{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;
+  color:var(--glaze-txt);display:block;margin-bottom:.35em}
+.step h3{font-size:1.12rem;margin-bottom:.5em;color:var(--paper)}
+.step p{color:var(--soft);font-size:.95rem;margin:0}
+
+/* ---------- Galerie ---------- */
+.galerie{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:700px){.galerie{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.galerie{grid-template-columns:repeat(4,1fr)}}
+.tile{padding:0;border:1px solid var(--ash-line);background:var(--ash);overflow:hidden;cursor:zoom-in;aspect-ratio:1;position:relative}
+.tile img{width:100%;height:100%;object-fit:cover;filter:saturate(.75) brightness(.85);transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s ease}
+.tile:hover img,.tile:focus-visible img{transform:scale(1.07);filter:saturate(1) brightness(1)}
+.tile:hover{border-color:rgba(232,164,74,.55)}
+.galerie .tile:nth-child(1),.galerie .tile:nth-child(8){grid-column:span 2;aspect-ratio:2/1}
+
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,9,8,.95);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.is-on{display:flex}
+.lb img{max-width:100%;max-height:88svh;object-fit:contain;border:1px solid var(--ash-line)}
+.lb__x{position:absolute;top:16px;right:16px;background:none;border:1px solid rgba(242,236,228,.35);color:var(--paper);
+  font-family:var(--f-display);font-size:1rem;width:44px;height:44px;cursor:pointer;border-radius:var(--r)}
+.lb__x:hover{border-color:var(--ember);color:var(--ember)}
+
+/* ---------- Über ---------- */
+.quote{font-family:var(--f-display);font-weight:600;font-size:clamp(1.4rem,3.4vw,2.1rem);line-height:1.22;
+  letter-spacing:-.02em;margin:0 0 1.2em;text-wrap:balance;color:var(--ink)}
+.sec--light .quote{color:var(--ink)}
+.sig{font-family:var(--f-display);font-weight:700;margin-top:1.6em;color:var(--ink)}
+.sig small{display:block;font-weight:500;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#6B6055;margin-top:.5em}
+
+/* ---------- Kontakt ---------- */
+.kontakt{display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media(min-width:900px){.kontakt{grid-template-columns:.85fr 1fr}}
+.karten{display:grid;gap:12px}
+.karte{display:block;text-decoration:none;padding:1.1rem 1.2rem;color:var(--paper);
+  border:1px solid var(--ash-line);background:var(--ash);transition:border-color .25s ease,transform .25s ease}
+.karte:hover{border-color:var(--glaze-line);transform:translateX(3px)}
+.karte b{font-family:var(--f-display);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:.3em}
+.karte span{font-family:var(--f-display);font-size:1.02rem;font-weight:600;color:var(--paper)}
+.form{display:grid;gap:14px}
+.feld{display:grid;gap:.45em}
+.feld label{font-family:var(--f-display);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.feld input,.feld textarea{
+  font-family:var(--f-body);font-size:1rem;color:var(--paper);background:var(--soot-2);
+  border:1px solid var(--ash-line);padding:.85em 1em;border-radius:var(--r);width:100%;
+}
+.feld input::placeholder,.feld textarea::placeholder{color:#8E867D}
+.feld textarea{min-height:130px;resize:vertical}
+.feld input:focus,.feld textarea:focus{border-color:var(--glaze-line);outline:none}
+.hinweis{font-size:.85rem;color:var(--muted);margin:0}
+
+/* ---------- Fuß ---------- */
+.fuss{background:#0C0B0A;border-top:1px solid var(--ash-line);padding-block:clamp(48px,7vw,72px);font-size:.9rem}
+.fuss__grid{display:grid;gap:2rem;grid-template-columns:1fr}
+@media(min-width:760px){.fuss__grid{grid-template-columns:1.2fr 1fr 1fr}}
+.fuss h4{font-family:var(--f-display);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--glaze-txt);margin:0 0 1em;font-weight:600}
+.fuss p{color:var(--muted);margin:0 0 .6em;line-height:1.65}
+.fuss a{color:var(--soft);text-decoration:none}
+.fuss a:hover{color:var(--ember)}
+.fuss__ende{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--ash-line);color:#948B81;font-size:.8rem;
+  display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;justify-content:space-between}
+
+/* ---------- Reveal ---------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.is-in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .glow{animation:none;opacity:.7}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="mark" href="#top">KOCH OFENBAU<span>ALTENA</span></a>
+    <nav class="nav__links" aria-label="Hauptmenü">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#galerie">Arbeiten</a>
+      <a href="#ueber">Über mich</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="nav__call" href="tel:+4915906380434">01590 6380434</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero__bg">
+      <img data-img="index/shutterstock_321275339.jpg" data-ph="Kaminfeuer im Wohnraum" alt="Wohnzimmer mit brennendem Kaminfeuer">
+    </div>
+    <div class="hero__veil"></div>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap hero__in">
+      <p class="eyebrow">Ofen- und Luftheizungsbau-Meister</p>
+      <h1>Öfen, die die <em>Wärme</em> halten.</h1>
+      <p class="hero__lead">Kachelöfen, Kaminöfen und Edelstahl-Schornsteine für Altena und das Sauerland. Geplant, gemauert und gesetzt von einem Meister – von der ersten Skizze bis zum ersten Feuer.</p>
+      <div class="hero__cta">
+        <a class="btn btn--fire" href="#kontakt">Beratungstermin anfragen</a>
+        <a class="btn btn--ghost" href="tel:+4915906380434">01590 6380434</a>
+      </div>
+      <div class="hero__meta">
+        <span>Meisterbetrieb seit 2018</span>
+        <span>Selbstständig seit 2022</span>
+        <span>Beratung vor Ort</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="leistungen">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <p class="eyebrow">Was ich baue</p>
+        <h2>Drei Wege zum eigenen Feuer.</h2>
+        <p class="lead">Welcher Ofen zu Ihnen passt, entscheidet der Raum, der Schornstein – und wie Sie heizen wollen. Der Unterschied in Kurzform:</p>
+      </div>
+
+      <div class="kacheln">
+        <a class="kachel rv" href="#kachelofen">
+          <img data-img="kachelofen/KO-Schmid-Zehendner.jpg" data-ph="Kachelofen" alt="Moderner Kachelofen mit keramischer Oberfläche">
+          <div class="kachel__body">
+            <span class="kachel__no">SPEICHERWÄRME</span>
+            <h3>Kachelofen</h3>
+            <p>Heizt einmal auf und gibt die Wärme über Stunden wieder ab.</p>
+            <span class="kachel__go">Mehr dazu →</span>
+          </div>
+        </a>
+        <a class="kachel rv" href="#kaminofen">
+          <img data-img="kaminofen/aufstellöfen/shutterstock_2043808709.jpg" data-ph="Kaminofen" alt="Kaminofen mit großer Sichtscheibe im Wohnraum">
+          <div class="kachel__body">
+            <span class="kachel__no">SCHNELLE WÄRME</span>
+            <h3>Kaminofen</h3>
+            <p>Ohne große Baustelle im Haus – frei stehend oder gemauert.</p>
+            <span class="kachel__go">Mehr dazu →</span>
+          </div>
+        </a>
+        <a class="kachel rv" href="#schornstein">
+          <img data-img="schornstein/IMG-20220928-WA0019-1.jpg" data-ph="Edelstahl-Schornstein" alt="Edelstahl-Schornstein an einer Hausfassade">
+          <div class="kachel__body">
+            <span class="kachel__no">VORAUSSETZUNG</span>
+            <h3>Edelstahl-Schornstein</h3>
+            <p>Kein passender Zug im Haus? Dann kommt er außen dazu.</p>
+            <span class="kachel__go">Mehr dazu →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--light" id="kachelofen">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__media rv">
+          <img data-img="kachelofen/KO-Schmid-Zehendner.jpg" data-ph="Kachelofen mit Sichtfeuer" alt="Kachelofen mit Sichtfeuer in einem modernen Wohnzimmer">
+        </div>
+        <div class="rv">
+          <p class="eyebrow">Kachelofen</p>
+          <h2>Nicht das Ding von Oma.</h2>
+          <p>Wer denkt, Kachelöfen stehen nur noch im alten Haus der Großeltern, irrt sich. Die Speicherleistung macht ihn heute attraktiver denn je – und die Designs fügen sich in einen modernen Wohnstil ein.</p>
+          <p>Die Wärme kommt über die keramische oder geputzte Oberfläche in den Raum. Ein Sichtfeuer ist bei den neuen Modellen möglich.</p>
+          <ul class="vorteile">
+            <li>Keramik als natürlicher Wärmespeicher</li>
+            <li>Lang anhaltende, milde Strahlungswärme</li>
+            <li>Innovative, umweltschonende Feuerungstechnik</li>
+            <li>Individuell gestaltbar – kein Ofen wie der andere</li>
+            <li>Ofenkachel-Keramik: angenehm bei Hautkontakt</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--ash" id="kaminofen">
+    <div class="wrap">
+      <div class="split split--flip">
+        <div class="split__media rv">
+          <img data-img="kaminofen/gemauerte kamine/HK_BR_CB_Eck_Abendlicht.jpg" data-ph="Gemauerter Eckkamin" alt="Gemauerter Kaminofen mit Eckscheibe im Abendlicht">
+        </div>
+        <div class="rv">
+          <p class="eyebrow">Kaminofen</p>
+          <h2>Feuer, ohne das halbe Haus aufzureißen.</h2>
+          <p class="lead">Der Kaminofen ist die Feuerstätte für alle, die die Faszination Feuer ohne große Baustelle in die eigenen vier Wände holen wollen.</p>
+          <p>Raumluftabhängig oder -unabhängig, von vorne, von zwei oder drei Seiten einsehbar, klassisch, extravagant oder wasserführend: Die Ausrichtung des Feuers richtet sich nach Ihrem Wohnbereich, nicht umgekehrt. Mit optionalen Wärmespeicherelementen holen Sie zusätzlich Strahlungswärme aus dem Holz.</p>
+          <p><a class="btn btn--ghost" href="#galerie">Ausgeführte Arbeiten ansehen</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="schornstein">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__media rv">
+          <img data-img="schornstein/IMG-20220928-WA0009.jpg" data-ph="Edelstahl-Schornstein" alt="Montierter Edelstahl-Schornstein am Haus">
+        </div>
+        <div class="rv">
+          <p class="eyebrow">Edelstahl-Schornstein</p>
+          <h2>Der Zug sitzt falsch? Dann bauen wir einen dazu.</h2>
+          <p class="lead">Ihr vorhandener Schornstein ist an der falschen Stelle im Haus oder schon belegt – und damit ist der Traum vom Ofen erst mal gestorben? Ist er nicht.</p>
+          <p>Ein Edelstahl-Schornstein wird außen angebaut, fügt sich sauber ins Bild des Hauses und schafft den Anschluss genau dort, wo der Ofen stehen soll. Planung und Ausführung kommen bei mir aus einer Hand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--ash" id="ablauf">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <p class="eyebrow">Vom Gespräch zum Feuer</p>
+        <h2>Vier Schritte, ein Ansprechpartner.</h2>
+      </div>
+      <div class="ablauf">
+        <div class="step rv">
+          <span class="step__no">01</span>
+          <h3>Beratung vor Ort</h3>
+          <p>Ich sehe mir Raum, Schornstein und Anschlüsse an und bespreche mit Ihnen, was in Ihrem Zuhause möglich ist.</p>
+        </div>
+        <div class="step rv">
+          <span class="step__no">02</span>
+          <h3>Planung &amp; Angebot</h3>
+          <p>Ofentyp, Technik und Oberfläche werden auf Ihren Raum abgestimmt. Sie bekommen ein Angebot, das Sie verstehen.</p>
+        </div>
+        <div class="step rv">
+          <span class="step__no">03</span>
+          <h3>Aufbau</h3>
+          <p>Anlieferung, Aufbau und Anschluss mache ich selbst. Keine wechselnden Kolonnen im Wohnzimmer.</p>
+        </div>
+        <div class="step rv">
+          <span class="step__no">04</span>
+          <h3>Erstes Feuer</h3>
+          <p>Wir heizen gemeinsam an. Sie erfahren, wie Sie richtig anheizen, nachlegen und den Ofen sauber halten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="galerie">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <p class="eyebrow">Ausgeführte Arbeiten</p>
+        <h2>Jeder Ofen ist ein Einzelstück.</h2>
+        <p class="lead">Ein Ausschnitt aus gebauten Anlagen und Ausführungsvarianten. Zum Vergrößern antippen.</p>
+      </div>
+      <div class="galerie rv" id="gal">
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/HK_AM_CB_Panorama.jpg" data-ph="Panoramakamin" alt="Panorama-Heizkamin mit breiter Sichtscheibe"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/KO_OI_RU_Granat.jpg" data-ph="Keramik Granat" alt="Kachelofen mit granatfarbener Keramik"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/KO_OI_RU_Sahara.jpg" data-ph="Keramik Sahara" alt="Kachelofen in Sandtönen"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/HK_Spartherm_Zehendner.jpg" data-ph="Heizkamin" alt="Gemauerter Heizkamin mit Sitzbank"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/Zehendner_Speicherofen.jpg" data-ph="Speicherofen" alt="Speicherofen mit geputzter Oberfläche"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/HK_LE_Zehendner_Eckscheibe.jpg" data-ph="Eckscheibe" alt="Heizkamin mit Eckscheibe"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/KO_Brunner_Zehendner.jpg" data-ph="Kachelofen" alt="Kachelofen mit Sichtfeuer"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/HK_BR_CB_Eck_Abendlicht.jpg" data-ph="Eckkamin" alt="Eckkamin im Abendlicht"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/aufstellöfen/IMG-20220928-WA0020-1.jpg" data-ph="Montage" alt="Aufgestellter Kaminofen nach der Montage"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/aufstellöfen/WIKING_Miro_4_Ambiente.jpg" data-ph="Aufstellofen" alt="Freistehender Kaminofen im Wohnraum"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="schornstein/IMG-20220928-WA0019-1.jpg" data-ph="Schornstein" alt="Edelstahl-Schornstein an der Fassade"></button>
+        <button class="tile" type="button"><img loading="lazy" data-img="kaminofen/gemauerte kamine/KO_Ofen_Innovativ_Hafnertec.jpg" data-ph="Ofenbank" alt="Kachelofen mit umlaufender Bank"></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--light" id="ueber">
+    <div class="wrap">
+      <div class="split split--flip">
+        <div class="split__media rv">
+          <img data-img="ueber-mich/wood-1846059-1zu.jpg" data-ph="Brennholz" alt="Gestapeltes Brennholz">
+        </div>
+        <div class="rv">
+          <p class="eyebrow">Über mich</p>
+          <p class="quote">„Ich baue keine Öfen von der Stange. Ich baue den, der in Ihr Haus gehört.“</p>
+          <p>1984 in Lüdenscheid geboren, heute mit meiner Familie im schönen kleinen Altena – dort ist auch mein Firmensitz. Nach der Schule habe ich meine Ausbildung zum Ofen- und Luftheizungsbauer abgeschlossen.</p>
+          <p>Nach einigen Jahren im Industrie-Feuerungsbau und meinem Wehrdienst bin ich zu meiner Leidenschaft zurückgekehrt: dem Kachel- und Kaminofenbau. 2018 habe ich meinen Meister im Ofen- und Luftheizungsbau gemacht, seit Oktober 2022 bin ich selbstständig.</p>
+          <p class="sig">Tim Koch<small>Ofen- und Luftheizungsbau-Meister</small></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="kontakt">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <p class="eyebrow">Kontakt</p>
+        <h2>Reden wir über Ihren Ofen.</h2>
+        <p class="lead">Am schnellsten geht es telefonisch. Wenn es Ihnen lieber schriftlich ist, schreiben Sie kurz, was Sie vorhaben – ich melde mich zurück.</p>
+      </div>
+
+      <div class="kontakt">
+        <div class="karten rv">
+          <a class="karte" href="tel:+4915906380434"><b>Anrufen</b><span>01590 6380434</span></a>
+          <a class="karte" href="https://wa.me/4915906380434"><b>WhatsApp</b><span>Fotos direkt schicken</span></a>
+          <a class="karte" href="mailto:tim@koch-ofenbau.de"><b>E-Mail</b><span>tim@koch-ofenbau.de</span></a>
+          <a class="karte" href="https://www.google.com/maps/search/?api=1&amp;query=Schubertstra%C3%9Fe+5+58762+Altena"><b>Firmensitz</b><span>Schubertstraße 5, 58762 Altena</span></a>
+        </div>
+
+        <div class="rv">
+          <div class="form">
+            <div class="feld">
+              <label for="f-name">Ihr Name</label>
+              <input id="f-name" type="text" autocomplete="name">
+            </div>
+            <div class="feld">
+              <label for="f-kontakt">Telefon oder E-Mail</label>
+              <input id="f-kontakt" type="text" autocomplete="tel">
+            </div>
+            <div class="feld">
+              <label for="f-text">Worum geht es?</label>
+              <textarea id="f-text" placeholder="Zum Beispiel: Wohnzimmer 30 m², Schornstein vorhanden, wir hätten gerne einen Kachelofen mit Sichtfeuer."></textarea>
+            </div>
+            <button class="btn btn--fire" type="button" id="senden">Anfrage senden</button>
+            <p class="hinweis">Die Anfrage öffnet Ihr E-Mail-Programm mit einer fertigen Nachricht an Tim Koch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fuss">
+  <div class="wrap">
+    <div class="fuss__grid">
+      <div>
+        <h4>Koch Ofenbau</h4>
+        <p>Tim Koch<br>Schubertstraße 5<br>58762 Altena<br>Deutschland</p>
+        <p><a href="tel:+4915906380434">01590 6380434</a><br><a href="mailto:tim@koch-ofenbau.de">tim@koch-ofenbau.de</a></p>
+      </div>
+      <div>
+        <h4>Leistungen</h4>
+        <p><a href="#kachelofen">Kachelofen</a><br><a href="#kaminofen">Kaminofen</a><br><a href="#schornstein">Edelstahl-Schornstein</a><br><a href="#galerie">Ausgeführte Arbeiten</a></p>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <p>Eintragung in der Handwerksrolle gemäß § 7 Abs. 1a HwO<br>USt-IdNr. DE340292558</p>
+        <p><a href="#">Datenschutz</a> · <a href="#">Impressum</a></p>
+      </div>
+    </div>
+    <div class="fuss__ende">
+      <span>© <span id="jahr">2026</span> Koch Ofenbau · Altena im Sauerland</span>
+      <span>Kachelöfen · Kaminöfen · Schornsteine</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Bildansicht">
+  <button class="lb__x" type="button" id="lb-x" aria-label="Schließen">&#10005;</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------------------------------------------------
+     BILDER: 3-stufige Kette
+     1. images/<pfad>   (relativ, funktioniert auf dem Webserver)
+     2. https://koch-ofenbau.de/images/<pfad>
+     3. erzeugte Kachel-Grafik als SVG  -> Layout bleibt heil
+     --------------------------------------------------------- */
+  function platzhalter(label, w, h){
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid slice">'
+      + '<defs>'
+      + '<linearGradient id="g" x1="0" y1="0" x2="1" y2="1">'
+      + '<stop offset="0" stop-color="#1D1916"/><stop offset="1" stop-color="#173A32"/></linearGradient>'
+      + '<radialGradient id="e" cx="0.22" cy="0.86" r="0.75">'
+      + '<stop offset="0" stop-color="#E8A44A" stop-opacity="0.42"/>'
+      + '<stop offset="1" stop-color="#E8A44A" stop-opacity="0"/></radialGradient>'
+      + '<pattern id="k" width="64" height="64" patternUnits="userSpaceOnUse">'
+      + '<rect width="64" height="64" fill="none" stroke="#2F7A69" stroke-opacity="0.22"/></pattern>'
+      + '</defs>'
+      + '<rect width="100%" height="100%" fill="url(#g)"/>'
+      + '<rect width="100%" height="100%" fill="url(#k)"/>'
+      + '<rect width="100%" height="100%" fill="url(#e)"/>'
+      + '<text x="50%" y="50%" fill="#8FD3BE" font-family="system-ui,sans-serif" font-size="22"'
+      + ' letter-spacing="3" text-anchor="middle" opacity="0.85">' + label + '</text>'
+      + '</svg>';
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function ladeBild(img){
+    var pfad = img.getAttribute("data-img") || "";
+    var label = (img.getAttribute("data-ph") || "Bild").toUpperCase();
+    var quellen = [
+      "images/" + pfad.split("/").map(encodeURIComponent).join("/"),
+      "https://koch-ofenbau.de/images/" + pfad.split("/").map(encodeURIComponent).join("/")
+    ];
+    var i = 0;
+    var probe = new Image();
+    probe.onload = function(){ img.src = quellen[i]; img.removeAttribute("data-fallback"); };
+    probe.onerror = function(){
+      i++;
+      if(i < quellen.length){ probe.src = quellen[i]; }
+      else { img.src = platzhalter(label, 1200, 900); img.setAttribute("data-fallback","1"); }
+    };
+    probe.src = quellen[0];
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("img[data-img]"), ladeBild);
+
+  /* Jahr */
+  document.getElementById("jahr").textContent = new Date().getFullYear();
+
+  /* Reveal beim Scrollen */
+  var rv = document.querySelectorAll(".rv");
+  if(reduce || !("IntersectionObserver" in window)){
+    Array.prototype.forEach.call(rv, function(el){ el.classList.add("is-in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("is-in"); io.unobserve(e.target); }
+      });
+    }, {rootMargin:"0px 0px -8% 0px", threshold:.12});
+    Array.prototype.forEach.call(rv, function(el, i){
+      el.style.transitionDelay = (Math.min(i,4)*60)+"ms"; io.observe(el);
+    });
+  }
+
+  /* Lightbox */
+  var lb = document.getElementById("lb"),
+      lbImg = document.getElementById("lb-img"),
+      last = null;
+
+  function oeffne(src, alt){
+    lbImg.src = src; lbImg.alt = alt || "";
+    lb.classList.add("is-on");
+    document.body.style.overflow = "hidden";
+    document.getElementById("lb-x").focus();
+  }
+  function schliesse(){
+    lb.classList.remove("is-on");
+    lbImg.src = "";
+    document.body.style.overflow = "";
+    if(last) last.focus();
+  }
+  document.getElementById("gal").addEventListener("click", function(e){
+    var btn = e.target.closest(".tile");
+    if(!btn) return;
+    last = btn;
+    var img = btn.querySelector("img");
+    if(img.getAttribute("data-fallback")) return;
+    oeffne(img.src, img.alt);
+  });
+  document.getElementById("lb-x").addEventListener("click", schliesse);
+  lb.addEventListener("click", function(e){ if(e.target === lb) schliesse(); });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && lb.classList.contains("is-on")) schliesse();
+  });
+
+  /* Anfrage -> mailto, kein Backend noetig */
+  document.getElementById("senden").addEventListener("click", function(){
+    var n = document.getElementById("f-name").value.trim(),
+        k = document.getElementById("f-kontakt").value.trim(),
+        t = document.getElementById("f-text").value.trim();
+    var body = "Name: " + n + "\nKontakt: " + k + "\n\n" + t;
+    window.location.href = "mailto:tim@koch-ofenbau.de"
+      + "?subject=" + encodeURIComponent("Anfrage über die Website")
+      + "&body=" + encodeURIComponent(body);
+  });
+})();
+</script>
+</body>
+</html>
