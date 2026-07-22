@@ -484,15 +484,15 @@ p{margin:0 0 1.1em}
           <div class="form">
             <div class="feld">
               <label for="f-name">Ihr Name</label>
-              <input id="f-name" type="text" autocomplete="name">
+              <input id="f-name" type="text" autocomplete="name" maxlength="80">
             </div>
             <div class="feld">
               <label for="f-kontakt">Telefon oder E-Mail</label>
-              <input id="f-kontakt" type="text" autocomplete="tel">
+              <input id="f-kontakt" type="text" autocomplete="tel" maxlength="80">
             </div>
             <div class="feld">
               <label for="f-text">Worum geht es?</label>
-              <textarea id="f-text" placeholder="Zum Beispiel: Wohnzimmer 30 m², Schornstein vorhanden, wir hätten gerne einen Kachelofen mit Sichtfeuer."></textarea>
+              <textarea id="f-text" maxlength="1200" placeholder="Zum Beispiel: Wohnzimmer 30 m², Schornstein vorhanden, wir hätten gerne einen Kachelofen mit Sichtfeuer."></textarea>
             </div>
             <button class="btn btn--fire" type="button" id="senden">Anfrage senden</button>
             <p class="hinweis">Die Anfrage öffnet Ihr E-Mail-Programm mit einer fertigen Nachricht an Tim Koch.</p>
@@ -634,11 +634,23 @@ p{margin:0 0 1.1em}
     if(e.key === "Escape" && lb.classList.contains("is-on")) schliesse();
   });
 
-  /* Anfrage -> mailto, kein Backend noetig */
+  /* Anfrage -> mailto, kein Backend noetig.
+     saeubere(): entfernt Steuerzeichen und Zeilenumbrueche aus den
+     einzeiligen Feldern und begrenzt die Laenge. encodeURIComponent()
+     unten kodiert ohnehin & und : mit, sodass aus einer Eingabe keine
+     zusaetzlichen mailto-Parameter (cc, bcc, subject) werden koennen. */
+  function saeubere(wert, maxLaenge, mehrzeilig){
+    var s = String(wert).slice(0, maxLaenge);
+    s = mehrzeilig
+      ? s.replace(/[^\S\r\n]*[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
+      : s.replace(/[\u0000-\u001F\u007F]/g, " ");
+    return s.trim();
+  }
+
   document.getElementById("senden").addEventListener("click", function(){
-    var n = document.getElementById("f-name").value.trim(),
-        k = document.getElementById("f-kontakt").value.trim(),
-        t = document.getElementById("f-text").value.trim();
+    var n = saeubere(document.getElementById("f-name").value, 80, false),
+        k = saeubere(document.getElementById("f-kontakt").value, 80, false),
+        t = saeubere(document.getElementById("f-text").value, 1200, true);
     var body = "Name: " + n + "\nKontakt: " + k + "\n\n" + t;
     window.location.href = "mailto:tim@koch-ofenbau.de"
       + "?subject=" + encodeURIComponent("Anfrage über die Website")
